@@ -4,12 +4,12 @@ import { CreateUserDto } from './create-user.dto';
 import { UserService } from './user.service';
 
 
-@Controller('user')
+@Controller('users')
 export class UsersController {
 
     constructor(private readonly userService: UserService){}
      
-    @Post('register')
+    @Post()
     registerUser(@Body() createUserDto: CreateUserDto){
         return this.userService.registerUser(createUserDto);
     }
@@ -17,7 +17,7 @@ export class UsersController {
     @Get()
     getAllUsers(@Query('role') role?: string) {
     if (role) {
-        return this.userService.getUserByRole(role);
+        return this.userService.getUserByRole(role);    
     }
 
     return this.userService.getUsers();
